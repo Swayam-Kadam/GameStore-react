@@ -1,0 +1,46 @@
+-->first we create index.js into reducer folder for combinning all reducer into one file
+
+combineReducer code as following.......
+
+            import { combineReducers } from "redux";
+            import amountReducer from "./amountReducer";
+
+            const reducers = combineReducers({ //this function store multiple reducer
+                amount : amountReducer   //its amount reducer
+            })
+
+            export default reducers
+
+-->then we are creating a index.js into state folder beacuse they gives access of action-create folder  different action direclty into state folder 
+        export * as bindActionCreators from "./action-creator/index"
+
+-->then create a store.js into state folder 
+
+    --following createStore function accept all reducers,inital state and Middleware 
+
+                    import { applyMiddleware,legacy_createStore } from "redux";
+                    import  {thunk}  from "redux-thunk";  //redux-thunk is use to execute asyncronous function
+                    import reducers from "./reducers";
+
+                    export const store = legacy_createStore(reducers,{},applyMiddleware(thunk))
+
+
+-->then apply access of this store file for whole application so forst go to index.js file and wrap <App/> component through <provider store={store}><provider/>
+
+            import React from 'react';
+            import ReactDOM from 'react-dom/client';
+            import './index.css';
+            import App from './App';
+            import reportWebVitals from './reportWebVitals';
+            import { Provider } from 'react-redux'; //import for provider
+            import { store } from './state/store';  //import store file for argument
+
+            const root = ReactDOM.createRoot(document.getElementById('root'));
+            root.render(
+            <React.StrictMode>
+                <Provider store={store}>  //here store is an argument 
+                <App />
+                </Provider>
+            </React.StrictMode>
+            );
+

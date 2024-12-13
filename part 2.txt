@@ -1,0 +1,60 @@
+-firstly we are creating a React application then import bootstrap css and javascript LINK
+-then open terminal and download redux,react-redux and redux thunk library as following
+      >>  npm i redux react-redux redux-thunk
+
+-then create a navabar.js component as same as bootstrap document
+
+-and create shop.js component as following
+
+        import React from 'react'
+
+        const Shop = () => {
+        return (
+            <div>
+                <h2>Deposite/Withdraw Money </h2>
+            <button className="btn btn-primary mx-2">+</button>
+            Update Balance
+            <button className="btn btn-primary mx-2">-</button>
+            </div>
+        )
+        }
+
+        export default Shop
+
+-and then clear App.js and import navabar.js and shop.js 
+
+-then create a state folder and also make two folders inside state folders 1)action-creator and 2)reducers
+
+    1)action-creator:- make index.js file and write following code..
+
+                        export const depositeMoney = (amount) =>{
+                            return (dispatch)=>{
+                                dispatch({
+                                type:'deposit',
+                                payload:amount
+                                })
+                            }
+                        }
+
+                        export const withdrawMoney = (amount) =>{
+                            return (dispatch)=>{
+                                dispatch({
+                                type:'withdraw',
+                                payload:amount
+                                })
+                            }
+                        }
+    
+    2)reducers:- make amountReducer.js and write following code..
+
+                    export default reducer =  (state=0,action)=>{
+                        if(action.type=='deposit'){
+                            return state + action.payload
+                        }
+                        else if(action.type=='withdraw'){
+                            return state - action.payload
+                        }
+                        else{
+                            return state;
+                        }
+                    }
