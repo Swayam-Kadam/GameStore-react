@@ -10,7 +10,7 @@ function App() {
   return (
     <>
     <div className="App">
-    <Router basename="/GameStore-react">
+    <Router>
       <Navbar/>
       <Routes>
         <Route path="/" element={<Carts />} />
